@@ -1,0 +1,32 @@
+---
+
+supervisor_disable: true
+
+start_secs: 3
+start_retries: 9
+
+supervisor_commands:
+  artisan_commands: []
+  raw_commands: []
+  craft_commands: []
+
+artisan_commands_override: []
+raw_commands_override: []
+craft_commands_override: []
+
+artisan_template: supervisor_artisan.conf.j2
+raw_template: supervisor_raw.conf.j2
+craft_template: supervisor_craft.conf.j2
+
+supervisor_command_user: supervisor
+supervisor_command_numprocs: 1
+app_directory: /change/me
+
+logrotate_conf_dir: "/etc/logrotate.d/"
+logrotate_scripts:
+  - name: supervisor_logrotation
+    path: "/apps/middleman/storage/logs/supervisor*.log"
+    options:
+      - daily
+      - rotate 7
+      - dateext
